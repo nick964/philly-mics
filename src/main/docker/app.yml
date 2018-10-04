@@ -1,0 +1,15 @@
+version: '2'
+services:
+    openmics-app:
+        image: openmics
+        environment:
+            # - _JAVA_OPTIONS=-Xmx512m -Xms256m
+            - SPRING_PROFILES_ACTIVE=prod,swagger
+            - SPRING_DATASOURCE_URL=jdbc:mysql://openmics-mysql:3306/openmics?useUnicode=true&characterEncoding=utf8&useSSL=false
+            - JHIPSTER_SLEEP=10 # gives time for the database to boot before the application
+        ports:
+            - 8080:8080
+    openmics-mysql:
+        extends:
+            file: mysql.yml
+            service: openmics-mysql
