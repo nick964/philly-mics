@@ -1,0 +1,86 @@
+<div>
+    <h2 id="page-heading">
+        <span>Mics</span>
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-mic" [routerLink]="['/mic/new']">
+            <fa-icon [icon]="'plus'"></fa-icon>
+            <span >
+            Create new Mic
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <br/>
+    <div class="table-responsive" *ngIf="mics">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+            <th><span>ID</span></th>
+            <th><span>Name</span></th>
+            <th><span>Start Date</span></th>
+            <th><span>End Date</span></th>
+            <th><span>Mic Time</span></th>
+            <th><span>Duration</span></th>
+            <th><span>Is Recurring</span></th>
+            <th><span>Recurrence Pattern</span></th>
+            <th><span>Street Address</span></th>
+            <th><span>Postal Code</span></th>
+            <th><span>City</span></th>
+            <th><span>Notes</span></th>
+            <th><span>Mic Type</span></th>
+            <th><span>User</span></th>
+            <th><span>Host</span></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let mic of mics ;trackBy: trackId">
+                <td><a [routerLink]="['/mic', mic.id, 'view' ]">{{mic.id}}</a></td>
+                <td>{{mic.name}}</td>
+                <td>{{mic.startDate | date:'medium'}}</td>
+                <td>{{mic.endDate | date:'medium'}}</td>
+                <td>{{mic.micTime}}</td>
+                <td>{{mic.duration}}</td>
+                <td>{{mic.isRecurring}}</td>
+                <td>{{mic.recurrencePattern}}</td>
+                <td>{{mic.streetAddress}}</td>
+                <td>{{mic.postalCode}}</td>
+                <td>{{mic.city}}</td>
+                <td>{{mic.notes}}</td>
+                <td>{{mic.micType}}</td>
+                <td>
+                    {{mic.user?.login}}
+                </td>
+                <td>
+                    <span *ngFor="let host of mic.hosts; let last = last">
+                            <a class="form-control-static" [routerLink]="['../host', host?.id, 'view' ]">{{host.id}}</a>{{last ? '' : ', '}}
+                        </span>
+                </td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['/mic', mic.id, 'view' ]"
+                                class="btn btn-info btn-sm">
+                            <fa-icon [icon]="'eye'"></fa-icon>
+                            <span class="d-none d-md-inline">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/mic', mic.id, 'edit']"
+                                class="btn btn-primary btn-sm">
+                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                            <span class="d-none d-md-inline">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'mic/'+ mic.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <fa-icon [icon]="'times'"></fa-icon>
+                            <span class="d-none d-md-inline">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

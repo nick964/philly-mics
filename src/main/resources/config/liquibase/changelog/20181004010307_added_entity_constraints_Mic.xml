@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <!--
+        Added the constraints for entity Mic.
+    -->
+    <changeSet id="20181004010307-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="user_id"
+                                 baseTableName="mic"
+                                 constraintName="fk_mic_user_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="jhi_user"/>
+
+        <addForeignKeyConstraint baseColumnNames="mics_id"
+                                 baseTableName="mic_host"
+                                 constraintName="fk_mic_host_mics_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="mic"/>
+        <addForeignKeyConstraint baseColumnNames="hosts_id"
+                                 baseTableName="mic_host"
+                                 constraintName="fk_mic_host_hosts_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="host"/>
+        
+    </changeSet>
+</databaseChangeLog>

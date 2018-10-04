@@ -1,0 +1,34 @@
+enum MicType {
+	COMEDY, MUSIC, POETRY, ANYTHING
+}
+
+entity Mic {
+	name String required,
+    startDate Instant required,
+    endDate Instant required,
+    micTime Long,
+    duration Long,
+    isRecurring Boolean required,
+    recurrencePattern String,
+    streetAddress String required,
+    postalCode String,
+    city String,
+    notes String,
+    micType MicType
+}
+
+entity Host {
+	hostId Long,
+    name String required,
+    email String required,
+    phoneNumber String
+}
+
+relationship ManyToMany {
+	Mic{host} to Host{mic}
+}
+relationship ManyToOne {
+    Mic{user(login)} to User
+}
+
+

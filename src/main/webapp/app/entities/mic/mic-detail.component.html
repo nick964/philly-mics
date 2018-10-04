@@ -1,0 +1,81 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="mic">
+            <h2><span>Mic</span> {{mic.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span>Name</span></dt>
+                <dd>
+                    <span>{{mic.name}}</span>
+                </dd>
+                <dt><span>Start Date</span></dt>
+                <dd>
+                    <span>{{mic.startDate}}</span>
+                </dd>
+                <dt><span>End Date</span></dt>
+                <dd>
+                    <span>{{mic.endDate}}</span>
+                </dd>
+                <dt><span>Mic Time</span></dt>
+                <dd>
+                    <span>{{mic.micTime}}</span>
+                </dd>
+                <dt><span>Duration</span></dt>
+                <dd>
+                    <span>{{mic.duration}}</span>
+                </dd>
+                <dt><span>Is Recurring</span></dt>
+                <dd>
+                    <span>{{mic.isRecurring}}</span>
+                </dd>
+                <dt><span>Recurrence Pattern</span></dt>
+                <dd>
+                    <span>{{mic.recurrencePattern}}</span>
+                </dd>
+                <dt><span>Street Address</span></dt>
+                <dd>
+                    <span>{{mic.streetAddress}}</span>
+                </dd>
+                <dt><span>Postal Code</span></dt>
+                <dd>
+                    <span>{{mic.postalCode}}</span>
+                </dd>
+                <dt><span>City</span></dt>
+                <dd>
+                    <span>{{mic.city}}</span>
+                </dd>
+                <dt><span>Notes</span></dt>
+                <dd>
+                    <span>{{mic.notes}}</span>
+                </dd>
+                <dt><span>Mic Type</span></dt>
+                <dd>
+                    <span>{{mic.micType}}</span>
+                </dd>
+                <dt><span>User</span></dt>
+                <dd>
+                    {{mic.user?.login}}
+                </dd>
+                <dt><span>Host</span></dt>
+                <dd>
+                    <span *ngFor="let host of mic.hosts; let last = last">
+                        <a [routerLink]="['/host', host?.id, 'view' ]">{{host.id}}</a>{{last ? '' : ', '}}
+                    </span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/mic', mic.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

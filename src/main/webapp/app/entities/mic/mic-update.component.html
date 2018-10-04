@@ -1,0 +1,143 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+            <h2 id="jhi-mic-heading">Create or edit a Mic</h2>
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+                <div class="form-group" [hidden]="!mic.id">
+                    <label for="id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id"
+                        [(ngModel)]="mic.id" readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_name">Name</label>
+                    <input type="text" class="form-control" name="name" id="field_name"
+                        [(ngModel)]="mic.name" required/>
+                    <div [hidden]="!(editForm.controls.name?.dirty && editForm.controls.name?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.name?.errors?.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_startDate">Start Date</label>
+                    <div class="d-flex">
+                        <input id="field_startDate" type="datetime-local" class="form-control" name="startDate" [(ngModel)]="startDate"
+                        required/>
+                    </div>
+                    <div [hidden]="!(editForm.controls.startDate?.dirty && editForm.controls.startDate?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.startDate?.errors?.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.controls.startDate?.errors?.ZonedDateTimelocal">
+                            This field should be a date and time.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_endDate">End Date</label>
+                    <div class="d-flex">
+                        <input id="field_endDate" type="datetime-local" class="form-control" name="endDate" [(ngModel)]="endDate"
+                        required/>
+                    </div>
+                    <div [hidden]="!(editForm.controls.endDate?.dirty && editForm.controls.endDate?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.endDate?.errors?.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.controls.endDate?.errors?.ZonedDateTimelocal">
+                            This field should be a date and time.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_micTime">Mic Time</label>
+                    <input type="number" class="form-control" name="micTime" id="field_micTime"
+                        [(ngModel)]="mic.micTime" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_duration">Duration</label>
+                    <input type="number" class="form-control" name="duration" id="field_duration"
+                        [(ngModel)]="mic.duration" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_isRecurring">Is Recurring</label>
+                    <input type="checkbox" class="form-control" name="isRecurring" id="field_isRecurring"
+                        [(ngModel)]="mic.isRecurring" />
+                    <div [hidden]="!(editForm.controls.isRecurring?.dirty && editForm.controls.isRecurring?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.isRecurring?.errors?.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_recurrencePattern">Recurrence Pattern</label>
+                    <input type="text" class="form-control" name="recurrencePattern" id="field_recurrencePattern"
+                        [(ngModel)]="mic.recurrencePattern" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_streetAddress">Street Address</label>
+                    <input type="text" class="form-control" name="streetAddress" id="field_streetAddress"
+                        [(ngModel)]="mic.streetAddress" required/>
+                    <div [hidden]="!(editForm.controls.streetAddress?.dirty && editForm.controls.streetAddress?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.streetAddress?.errors?.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_postalCode">Postal Code</label>
+                    <input type="text" class="form-control" name="postalCode" id="field_postalCode"
+                        [(ngModel)]="mic.postalCode" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_city">City</label>
+                    <input type="text" class="form-control" name="city" id="field_city"
+                        [(ngModel)]="mic.city" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_notes">Notes</label>
+                    <input type="text" class="form-control" name="notes" id="field_notes"
+                        [(ngModel)]="mic.notes" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_micType">Mic Type</label>
+                    <select class="form-control" name="micType" [(ngModel)]="mic.micType" id="field_micType" >
+                        <option value="COMEDY">COMEDY</option>
+                        <option value="MUSIC">MUSIC</option>
+                        <option value="POETRY">POETRY</option>
+                        <option value="ANYTHING">ANYTHING</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_user">User</label>
+                    <select class="form-control" id="field_user" name="user" [(ngModel)]="mic.user" >
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="userOption.id === mic.user?.id ? mic.user : userOption" *ngFor="let userOption of users; trackBy: trackUserById">{{userOption.login}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="field_host">Host</label>
+                    <select class="form-control" id="field_host" multiple name="host" [(ngModel)]="mic.hosts">
+                        <option [ngValue]="getSelected(mic.hosts, hostOption)" *ngFor="let hostOption of hosts; trackBy: trackHostById">{{hostOption.id}}</option>
+                    </select>
+                </div>
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span>Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span>Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,60 @@
+<div>
+    <h2 id="page-heading">
+        <span>Hosts</span>
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-host" [routerLink]="['/host/new']">
+            <fa-icon [icon]="'plus'"></fa-icon>
+            <span >
+            Create new Host
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <br/>
+    <div class="table-responsive" *ngIf="hosts">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+            <th><span>ID</span></th>
+            <th><span>Host Id</span></th>
+            <th><span>Name</span></th>
+            <th><span>Email</span></th>
+            <th><span>Phone Number</span></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let host of hosts ;trackBy: trackId">
+                <td><a [routerLink]="['/host', host.id, 'view' ]">{{host.id}}</a></td>
+                <td>{{host.hostId}}</td>
+                <td>{{host.name}}</td>
+                <td>{{host.email}}</td>
+                <td>{{host.phoneNumber}}</td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['/host', host.id, 'view' ]"
+                                class="btn btn-info btn-sm">
+                            <fa-icon [icon]="'eye'"></fa-icon>
+                            <span class="d-none d-md-inline">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/host', host.id, 'edit']"
+                                class="btn btn-primary btn-sm">
+                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                            <span class="d-none d-md-inline">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'host/'+ host.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <fa-icon [icon]="'times'"></fa-icon>
+                            <span class="d-none d-md-inline">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
