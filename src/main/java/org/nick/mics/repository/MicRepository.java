@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.*;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -29,5 +30,8 @@ public interface MicRepository extends JpaRepository<Mic, Long> {
 
     @Query("select mic from Mic mic left join fetch mic.hosts where mic.id =:id")
     Optional<Mic> findOneWithEagerRelationships(@Param("id") Long id);
+
+    @Query("select distinct mic from Mic mic where mic.micType = :micType and mic.endDate > :givenDate")
+    List<Mic> findMicsbyTypeAndDate(@Param("micType") String micType, @Param("givenDate") Date givenDate);
 
 }

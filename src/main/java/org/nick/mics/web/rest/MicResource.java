@@ -3,6 +3,7 @@ package org.nick.mics.web.rest;
 import com.codahale.metrics.annotation.Timed;
 import org.nick.mics.domain.Mic;
 import org.nick.mics.repository.MicRepository;
+import org.nick.mics.service.MicService;
 import org.nick.mics.web.rest.errors.BadRequestAlertException;
 import org.nick.mics.web.rest.util.HeaderUtil;
 import io.github.jhipster.web.util.ResponseUtil;
@@ -30,9 +31,11 @@ public class MicResource {
     private static final String ENTITY_NAME = "mic";
 
     private final MicRepository micRepository;
+    private final MicService micService;
 
-    public MicResource(MicRepository micRepository) {
+    public MicResource(MicRepository micRepository, MicService micService) {
         this.micRepository = micRepository;
+        this.micService = micService;
     }
 
     /**
@@ -79,6 +82,19 @@ public class MicResource {
 
     /**
      * GET  /mics : get all the mics.
+     *
+     * @param eagerload flag to eager load entities from relationships (This is applicable for many-to-many)
+     * @return the ResponseEntity with status 200 (OK) and the list of mics in body
+     */
+    @GetMapping("/mics")
+    @Timed
+    public List<Mic> getAllWeeklyMicsOfType(@RequestParam("micType") String micType, @RequestParam("date") String weekOf) {
+        log.debug("REST request to get all weekly mics with micType: " +micType + " and Date of " + weekOf);
+        return micService.getWeeklyMics(micType, weekOf);
+    }
+
+    /**
+     * GET  /weeklymics : get all the weekly mics based on Type and
      *
      * @param eagerload flag to eager load entities from relationships (This is applicable for many-to-many)
      * @return the ResponseEntity with status 200 (OK) and the list of mics in body

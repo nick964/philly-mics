@@ -126,7 +126,7 @@
                 <div class="form-group">
                     <label for="field_host">Host</label>
                     <select class="form-control" id="field_host" multiple name="host" [(ngModel)]="mic.hosts">
-                        <option [ngValue]="getSelected(mic.hosts, hostOption)" *ngFor="let hostOption of hosts; trackBy: trackHostById">{{hostOption.id}}</option>
+                        <option [ngValue]="getSelected(mic.hosts, hostOption)" *ngFor="let hostOption of hosts; trackBy: trackHostById">{{hostOption.name}}</option>
                     </select>
                 </div>
             </div>
